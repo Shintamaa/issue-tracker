@@ -20,4 +20,9 @@ class Project extends Model
         return $this->belongsToMany(User::class, 'project_members')
             ->withPivot('role', 'added_by', 'joined_at');
     }
+
+    public function issues() 
+    { 
+        return $this->hasMany(Issue::class); 
+    }
 }
