@@ -60,7 +60,7 @@ function Login() {
               <input
                 id="username"
                 type="text"
-                placeholder="your_username"
+                placeholder="admin admin123"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
