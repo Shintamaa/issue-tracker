@@ -1,5 +1,13 @@
 
-import { Outlet, NavLink, useNavigate, useLocation } from "react-router-dom";
+import { useState } from "react";
+
+import {
+  Outlet,
+  NavLink,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
+
 import {
   LayoutGrid,
   CalendarDays,
@@ -9,7 +17,9 @@ import {
   Search,
   Menu,
   ChevronDown,
+  ChevronUp,
   LogOut,
+  UserRound,
 } from "lucide-react";
 
 import "../styles/MainLayout.css";
@@ -54,10 +64,7 @@ export default function MainLayout() {
     },
   ];
 
-  const handleLogout = () => {
-    // Sementara kembali ke Login
-    navigate("/login");
-  };
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   return (
     <div className="main-layout">
@@ -102,27 +109,65 @@ export default function MainLayout() {
         </nav>
 
         {/* Profil dan Logout */}
+        
         <div className="sidebar-bottom">
-          <button className="user-profile" type="button">
-            <div className="profile-avatar">N</div>
+          <div className="profile-dropdown-wrapper">
 
-            <div className="profile-info">
-              <strong>Nama</strong>
-              <small>Posisi</small>
-            </div>
+            {/* Menu yang muncul saat profil diklik */}
+            {showProfileMenu && (
+              <div className="profile-dropdown">
+                <button
+                  type="button"
+                  className="profile-dropdown-item"
+                  onClick={() => {
+                    setShowProfileMenu(false);
+                    navigate('/settings');
+                  }}
+                >
+                  <UserRound size={17} />
+                  <span>Profil Saya</span>
+                </button>
 
-            <ChevronDown size={16} />
-          </button>
+                <div className="profile-dropdown-divider" />
 
-          <button
-            className="logout-button"
-            type="button"
-            onClick={handleLogout}
-          >
-            <LogOut size={17} />
-            Logout
-          </button>
+                <button
+                  type="button"
+                  className="profile-dropdown-item logout-item"
+                  onClick={() => {
+                    setShowProfileMenu(false);
+                    navigate('/login');
+                  }}
+                >
+                  <LogOut size={17} />
+                  <span>Logout</span>
+                </button>
+              </div>
+            )}
+
+            {/* Tombol profil pengguna */}
+            <button
+              type="button"
+              className="user-profile"
+              onClick={() => setShowProfileMenu(!showProfileMenu)}
+              aria-expanded={showProfileMenu}
+            >
+              <div className="profile-avatar">A</div>
+
+              <div className="profile-info">
+                <strong>Admin</strong>
+                <small>Project Member</small>
+              </div>
+
+              {showProfileMenu ? (
+                <ChevronUp size={17} />
+              ) : (
+                <ChevronDown size={17} />
+              )}
+            </button>
+
+          </div>
         </div>
+
       </aside>
 
       {/* KONTEN UTAMA */}
