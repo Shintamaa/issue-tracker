@@ -1,0 +1,307 @@
+
+/* ===== LAYOUT UTAMA ===== */
+.main-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #e9edf9;
+  color: #222532;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  width: 240px;
+  min-width: 240px;
+  min-height: 100vh;
+  background: #d5d9e9;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 14px;
+  box-sizing: border-box;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 8px 24px;
+  border-bottom: 1px solid #bcc2d3;
+}
+
+.brand-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333b52;
+}
+
+.sidebar-brand h2 {
+  font-size: 19px;
+  margin: 0;
+  font-weight: 750;
+}
+
+.sidebar-brand p {
+  font-size: 11px;
+  margin: 4px 0 0;
+  color: #646b7e;
+}
+
+/* ===== MENU SIDEBAR ===== */
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 20px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 14px;
+  color: #263044;
+  text-decoration: none;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.menu-item:hover {
+  background: #c4cae3;
+}
+
+.menu-item.active {
+  background: linear-gradient(110deg, #a3aedf, #788bdc);
+  color: white;
+}
+
+.menu-item > svg {
+  flex-shrink: 0;
+}
+
+.menu-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.menu-text span {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.menu-text small {
+  font-size: 10px;
+  font-weight: 400;
+  opacity: 0.75;
+}
+
+/* ===== PROFIL DAN LOGOUT ===== */
+.sidebar-bottom {
+  margin-top: auto;
+  border-top: 1px solid #bfc5d6;
+  padding-top: 15px;
+}
+
+.user-profile {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 7px;
+  background: #8394df;
+  color: white;
+  text-align: left;
+  cursor: pointer;
+}
+
+.profile-avatar,
+.header-avatar {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #f3e2ed;
+  color: #43405b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 3px;
+}
+
+.profile-info strong {
+  font-size: 12px;
+}
+
+.profile-info small {
+  font-size: 10px;
+}
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  color: #444b60;
+  cursor: pointer;
+}
+
+/* ===== AREA UTAMA ===== */
+.main-area {
+  flex: 1;
+  min-width: 0;
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+/* ===== HEADER PROJECT BOARD ===== */
+.topbar {
+  min-height: 70px;
+  padding: 14px 22px;
+  background: #3d425c;
+  border-radius: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  color: white;
+  box-sizing: border-box;
+}
+
+.welcome-text h2 {
+  font-size: 20px;
+  margin: 0 0 5px;
+}
+
+.welcome-text p {
+  font-size: 11px;
+  color: #c7c9d5;
+  margin: 0;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #f3f4fa;
+  border-radius: 6px;
+  color: #596075;
+}
+
+.search-box input {
+  width: 150px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #333;
+  font-size: 12px;
+}
+
+/* ===== KONTEN HALAMAN ===== */
+.page-content {
+  background: white;
+  border-radius: 8px;
+  padding: 22px;
+  min-height: calc(100vh - 125px);
+  box-sizing: border-box;
+}
+
+/* Project Board memiliki header */
+.page-content.with-header {
+  margin-top: 18px;
+}
+
+/* Halaman lain tanpa header */
+.page-content.without-header {
+  margin-top: 0;
+  min-height: calc(100vh - 36px);
+}
+
+/* Samakan jarak judul di semua halaman */
+.page-content h1,
+.page-content h2 {
+  margin-top: 0;
+}
+
+/* ===== PROJECT BOARD PLACEHOLDER ===== */
+.board-placeholder h2 {
+  font-size: 20px;
+  margin: 0 0 5px;
+}
+
+.board-placeholder p {
+  font-size: 12px;
+  color: #777d8b;
+}
+
+.board-empty {
+  min-height: 300px;
+  margin-top: 24px;
+  border: 2px dashed #d6d9e8;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.board-empty h3 {
+  margin: 0 0 8px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 800px) {
+  .sidebar {
+    width: 72px;
+    min-width: 72px;
+    padding: 15px 8px;
+  }
+
+  .sidebar-brand h2,
+  .sidebar-brand p,
+  .menu-text,
+  .profile-info,
+  .user-profile > svg,
+  .logout-button {
+    display: none;
+  }
+
+  .sidebar-brand,
+  .menu-item,
+  .user-profile {
+    justify-content: center;
+  }
+
+  .topbar {
+    flex-wrap: wrap;
+  }
+
+  .search-box input {
+    width: 100px;
+  }
+}

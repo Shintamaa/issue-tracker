@@ -2,23 +2,27 @@ import { useState } from 'react';
 import '../styles/Login.css';
 import { Eye, EyeOff } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState('');
+  const navigate = useNavigate();
   
-    const handleLogin = (e) => {
+      
+  const handleLogin = (e) => {
     e.preventDefault();
 
     if (username === 'admin' && password === 'admin123') {
-        setLoginError('');
-        alert('Login berhasil! (Demo)');
+      setLoginError('');
+      navigate('/board');
     } else {
-        setLoginError('Username atau password salah');
+      setLoginError('Username atau password salah');
     }
-    };
+  };
+
 
     //doksli
 //   const handleLogin = (e) => {
