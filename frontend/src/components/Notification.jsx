@@ -47,7 +47,7 @@ export default Notification;
 // // Notifikasi gagal
 // toast.error('Gagal menyimpan perubahan.');
 
-// // Notifikasi informasi
+// // Notifikasi informasii
 // toast('Data proyek telah diperbarui.', {
 //   icon: 'ℹ️',
 // });
