@@ -3,6 +3,7 @@ import '../styles/Login.css';
 import { Eye, EyeOff } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import toast from 'react-hot-toast';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -12,16 +13,22 @@ function Login() {
   const navigate = useNavigate();
   
       
-  const handleLogin = (e) => {
-    e.preventDefault();
+  
+const handleLogin = (e) => {
+  e.preventDefault();
 
-    if (username === 'admin' && password === 'admin123') {
-      setLoginError('');
-      navigate('/board');
-    } else {
-      setLoginError('Username atau password salah');
-    }
-  };
+  if (username === 'admin' && password === 'admin123') {
+    setLoginError('');
+
+    navigate('/board');
+
+    toast.success('Login berhasil! Selamat datang di ProjectHub.');
+
+  } else {
+    setLoginError('Username atau password salah');
+  }
+};
+
 
 
     //doksli

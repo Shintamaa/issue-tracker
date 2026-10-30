@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import '../styles/Login.css';
+import toast from 'react-hot-toast';
 
 function Register() {
   const [username, setUsername] = useState('');
