@@ -22,6 +22,8 @@ import {
   UserRound,
 } from "lucide-react";
 
+import toast from 'react-hot-toast';
+
 import "../styles/MainLayout.css";
 
 export default function MainLayout() {
@@ -130,17 +132,25 @@ export default function MainLayout() {
 
                 <div className="profile-dropdown-divider" />
 
+                
                 <button
                   type="button"
                   className="profile-dropdown-item logout-item"
                   onClick={() => {
+                    // Menutup dropdown profil
                     setShowProfileMenu(false);
-                    navigate('/login');
+
+                    // Kembali ke halaman login
+                    navigate('/login', { replace: true });
+
+                    // Menampilkan notifikasi logout berhasil
+                    toast.success('Logout berhasil! Kamu telah keluar dari ProjectHub.');
                   }}
                 >
-                  <LogOut size={17} />
-                  <span>Logout</span>
+                  <LogOut size={18} />
+                  Logout
                 </button>
+
               </div>
             )}
 
