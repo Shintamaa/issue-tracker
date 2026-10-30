@@ -1,0 +1,246 @@
+
+/* ===== HALAMAN LOGIN ===== */
+
+.login-page {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f1f1f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 32px;
+  font-family: Arial, sans-serif;
+}
+
+.login-page * {
+  box-sizing: border-box;
+}
+
+/* Container utama */
+.login-container {
+  width: 100%;
+  max-width: 1440px;
+  min-height: 950px;
+  background-color: #f7f8ff;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 90px;
+  padding: 26px;
+}
+
+/* ===== GAMBAR SEBELAH KIRI ===== */
+
+.login-banner {
+  min-height: 898px;
+  border-radius: 15px;
+  background-image:
+    url('https://images.pexels.com/photos/7134983/pexels-photo-7134983.jpeg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  padding: 52px;
+  color: white;
+  overflow: hidden;
+}
+
+.banner-text {
+  width: 100%;
+}
+
+.banner-text p {
+  font-size: 19px;
+  margin: 0 0 45px;
+  font-weight: 400;
+}
+
+.banner-text h1 {
+  font-size: 35px;
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin: 0;
+  max-width: 540px;
+}
+
+/* ===== FORM SEBELAH KANAN ===== */
+
+.login-form-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 35px 50px 35px 0;
+}
+
+.login-form-wrapper {
+  width: 100%;
+  max-width: 560px;
+}
+
+.login-form-wrapper h1 {
+  font-size: 35px;
+  font-weight: 700;
+  color: #101010;
+  margin: 0 0 15px;
+}
+
+.login-description {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #222;
+  margin: 0 0 35px;
+}
+
+.login-form-wrapper label {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 12px;
+}
+
+.login-form-wrapper input {
+  width: 100%;
+  height: 45px;
+  padding: 0 14px;
+  border: 1.5px solid #b9b9b9;
+  border-radius: 8px;
+  background: transparent;
+  color: #222;
+  font-size: 14px;
+  margin-bottom: 28px;
+  outline: none;
+}
+
+.login-form-wrapper input::placeholder {
+  color: #bdbdbd;
+}
+
+.login-form-wrapper input:focus {
+  border-color: #8191dd;
+}
+
+/* ===== PASSWORD ===== */
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  padding-right: 75px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  background: transparent;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* ===== TOMBOL LOGIN ===== */
+
+.login-button {
+  width: 100%;
+  height: 46px;
+  margin-top: 35px;
+  border: none;
+  border-radius: 7px;
+  background-color: #8191dd;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+  cursor: pointer;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.13);
+  transition: background-color 0.2s;
+}
+
+.login-button:hover {
+  background-color: #6d7fce;
+}
+
+/* ===== CREATE ACCOUNT ===== */
+
+.register-link {
+  margin-top: 35px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.register-link p {
+  margin: 0 0 4px;
+  color: #111;
+}
+
+.register-link a {
+  color: #7485d5;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 1000px) {
+  .login-container {
+    gap: 35px;
+    min-height: 700px;
+  }
+
+  .login-banner {
+    min-height: 650px;
+    padding: 30px;
+  }
+
+  .banner-text h1 {
+    font-size: 25px;
+  }
+
+  .login-form-section {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 700px) {
+  .login-page {
+    padding: 15px;
+  }
+
+  .login-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    min-height: auto;
+    padding: 15px;
+  }
+
+  .login-banner {
+    min-height: 280px;
+    padding: 25px;
+  }
+
+  .banner-text p {
+    font-size: 13px;
+    margin-bottom: 15px;
+  }
+
+  .banner-text h1 {
+    font-size: 22px;
+  }
+
+  .login-form-section {
+    padding: 30px 15px;
+  }
+
+  .login-form-wrapper h1 {
+    font-size: 28px;
+  }
+}
+
+.login-error {
+  color: #e53935;
+  font-size: 13px;
+  margin: -15px 0 15px;
+  font-weight: 500;
+}
