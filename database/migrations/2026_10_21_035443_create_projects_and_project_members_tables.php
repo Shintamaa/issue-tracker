@@ -13,18 +13,28 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->string('avatar')->nullable();
+            $table->string('project_key', 10)->unique();
+            $table->string('category')->nullable();
+            $table->string('visibility', 20)->default('private'); // private / public
+            $table->string('default_sprint_duration')->nullable();
+            $table->string('default_issue_assignee_role')->nullable();
+            $table->string('default_board_view')->default('kanban');
+            $table->string('date_format')->nullable();
+            $table->string('timezone')->nullable();
+            $table->boolean('is_archived')->default(false);
+            $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
 
         // 2. Buat tabel pivot project_members
         Schema::create('project_members', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('role')->default('Member'); // Contoh: Owner, Admin, Member
-            $table->foreignId('added_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('role', 50)->default('member'); // owner, admin, member, dll
+            $table->foreignId('added_by')->constrained('users')->onDelete('cascade');
             $table->timestamp('joined_at')->useCurrent();
-            $table->timestamps();
         });
     }
 
