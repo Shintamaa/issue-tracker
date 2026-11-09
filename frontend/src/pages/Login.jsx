@@ -1,41 +1,82 @@
+
 import { useState } from 'react';
 import '../styles/Login.css';
 import { Eye, EyeOff } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 function Login() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState('');
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
-  
-      
-  
-const handleLogin = (e) => {
-  e.preventDefault();
 
-  if (username === 'admin' && password === 'admin123') {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     setLoginError('');
+    setLoading(true);
 
-    navigate('/board');
+    try {
+      // Mengirim email dan password ke Laravel
+      const response = await fetch(
+        'http://127.0.0.1:8000/api/login',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify({
+            email: email.trim(),
+            password: password,
+          }),
+        }
+      );
 
-    toast.success('Login berhasil! Selamat datang di ProjectHub.');
+      const data = await response.json();
 
-  } else {
-    setLoginError('Username atau password salah');
-  }
-};
+      // Memeriksa respons dari Laravel
+      if (!response.ok) {
+        const pesanError = data.errors
+          ? Object.values(data.errors).flat()[0]
+          : data.message || 'Email atau password salah';
 
+        throw new Error(pesanError);
+      }
 
+      // Memastikan token tersedia
+      if (!data.token) {
+        throw new Error('Token login tidak ditemukan');
+      }
 
-    //doksli
-//   const handleLogin = (e) => {
-//     e.preventDefault();
-//     alert('Login diklik! Integrasi login belum dibuat.');
-//   };
+      // Menyimpan token autentikasi
+      sessionStorage.setItem('auth_token', data.token);
+
+      // Menyimpan informasi pengguna
+      sessionStorage.setItem(
+        'user',
+        JSON.stringify(data.user)
+      );
+
+      // Notifikasi berhasil
+      toast.success('Login berhasil! Selamat datang di ProjectHub.');
+
+      // Masuk ke Project Board
+      navigate('/board');
+
+    } catch (error) {
+      setLoginError(
+        error.message || 'Terjadi kesalahan saat login'
+      );
+
+      toast.error('Login gagal');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="login-page">
@@ -56,57 +97,79 @@ const handleLogin = (e) => {
         {/* Bagian form kanan */}
         <div className="login-form-section">
           <div className="login-form-wrapper">
+
             <h1>Login</h1>
+
             <p className="login-description">
               "Lorem ipsum" is a standard placeholder
               text used in publishing and design
             </p>
 
             <form onSubmit={handleLogin}>
-              <label htmlFor="username">Your Username</label>
+
+              <label htmlFor="email">Your Email</label>
               <input
-                id="username"
-                type="text"
-                placeholder="admin admin123"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                id="email"
+                type="email"
+                placeholder="your_email@example.com"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setLoginError('');
+                }}
                 required
               />
 
               <label htmlFor="password">Password</label>
+
               <div className="password-wrapper">
                 <input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
                   placeholder="••••••••"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setLoginError('');
+                  }}
                   required
                 />
-                {loginError && (
-                    <p className="login-error" role="alert">
-                        {loginError}
-                    </p>
-                )}
+
                 <button
-                    type="button"
-                    className="toggle-password"
-                    onClick={() => setShowPassword(!showPassword)}
-                    aria-label={showPassword ? 'Hide password' : 'Show password'}
-                    >
-                    {showPassword ? <EyeOff size={19} /> : <Eye size={19} />}
+                  type="button"
+                  className="toggle-password"
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={
+                    showPassword ? 'Hide password' : 'Show password'
+                  }
+                >
+                  {showPassword
+                    ? <EyeOff size={19} />
+                    : <Eye size={19} />}
                 </button>
               </div>
 
-              <button type="submit" className="login-button">
-                Login
+              {loginError && (
+                <p className="login-error" role="alert">
+                  {loginError}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                className="login-button"
+                disabled={loading}
+              >
+                {loading ? 'Logging in...' : 'Login'}
               </button>
+
             </form>
 
             <div className="register-link">
               <p>Don't have an account?</p>
               <Link to="/register">Create account</Link>
             </div>
+
           </div>
         </div>
 
